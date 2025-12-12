@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold">등록된 자취방</h3>
@@ -33,7 +34,7 @@
                         </div>
                         <h5 class="fw-bold mb-1 text-truncate">${room.title}</h5>
                         <h5 class="fw-bold text-primary mt-2">
-                            월 ${room.price} <span class="text-dark fs-6 fw-normal">/ 보증금 0</span>
+                            월 <fmt:formatNumber value="${room.price / 10000}" pattern="#,###" />만원 <span class="text-dark fs-6 fw-normal">/ 보증금 0</span>
                         </h5>
                         <p class="text-muted small mb-0 mt-3 text-truncate">
                             <i class="bi bi-geo-alt-fill text-danger"></i> ${room.address}

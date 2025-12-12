@@ -116,7 +116,7 @@
                 </c:if>
 
                 <c:if test="${not empty sessionScope.loginUser}">
-                    <span class="text-muted me-3" style="font-size:0.9rem;">
+                    <span class="text-muted me-3" style="font-size:0.95rem;">
                         <b>${sessionScope.loginUser.name}</b>님
                     </span>
                     <a href="/user/logout" class="btn btn-light btn-sm text-secondary rounded-pill border px-3">로그아웃</a>

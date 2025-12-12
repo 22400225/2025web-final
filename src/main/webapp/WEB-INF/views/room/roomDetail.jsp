@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ include file="../include/header.jsp" %>
 
 <div class="row">
@@ -17,7 +20,19 @@
 
             <h2 class="fw-bold mb-3" style="word-break: keep-all;">${room.title}</h2>
 
-            <h3 class="text-primary fw-bold mb-4">월 ${room.price}원</h3>
+            <div class="d-flex align-items-center mb-4">
+                <h3 class="text-primary fw-bold mb-0 me-2">
+                    월 <fmt:formatNumber value="${room.price / 10000}" pattern="#,###" />만원
+                </h3>
+
+                <button type="button" class="btn btn-link text-muted p-0"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-title="가격 상세 정보"
+                        data-bs-content="월세와 관리비가 포함된 가격이에요. 가스비와 수도세, 전기 사용료는 별도로 부과됩니다.">
+                    <i class="bi bi-info-circle-fill fs-5" style="color: #adb5bd; cursor: pointer;"></i>
+                </button>
+            </div>
 
             <hr style="opacity:0.1">
 
@@ -51,7 +66,7 @@
                 <c:if test="${sessionScope.loginUser.userNo == room.writerId}">
                     <div class="row g-2 mt-2">
                         <div class="col-6">
-                            <a href="/room/edit?id=${room.roomNo}" class="btn btn-light border w-100 fw-bold">수정</a>
+                            <a href="#" class="btn btn-light border w-100 fw-bold">수정</a>
                         </div>
                         <div class="col-6">
                             <a href="/room/delete?id=${room.roomNo}" onclick="return confirm('정말 삭제하시겠습니까?')" class="btn btn-light border w-100 fw-bold text-danger">삭제</a>
@@ -71,5 +86,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    // 페이지 로드 시 Bootstrap Popover 기능 활성화
+    document.addEventListener("DOMContentLoaded", function(){
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    });
+</script>
 
 <%@ include file="../include/footer.jsp" %>

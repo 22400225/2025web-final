@@ -4,19 +4,19 @@
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="custom-card">
-            <h3 class="fw-bold mb-4">📝 내 방 내놓기</h3>
+            <h3 class="fw-bold mb-4">내 방 내놓기</h3>
 
             <form action="/room/write" method="post" enctype="multipart/form-data">
                 <div class="mb-4">
                     <label class="form-label">제목</label>
-                    <input type="text" name="title" class="form-control" placeholder="예: 벧엘관 3분거리 깨끗한 원룸 양도해요" required>
+                    <input type="text" name="title" class="form-control" placeholder="예: 유야쪽 버정 3분거리 깨끗한 원룸 양도해요" required>
                 </div>
 
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label class="form-label">가격 (월세/관리비 포함)</label>
                         <div class="input-group">
-                            <input type="number" name="price" class="form-control" placeholder="350000">
+                            <input type="number" name="price" class="form-control" placeholder="예:350000">
                             <span class="input-group-text bg-light border-0">원</span>
                         </div>
                     </div>
@@ -33,13 +33,13 @@
 
                 <div class="mb-4">
                     <label class="form-label">주소</label>
-                    <input type="text" name="address" class="form-control mb-2" placeholder="도로명 주소 (예: 흥해읍 한동로...)" required>
-                    <input type="text" name="addressDetail" class="form-control" placeholder="상세 주소 (예: 101동 202호)">
+                    <input type="text" name="address" class="form-control mb-2" placeholder="도로명 주소 (예:  " required>
+                    <input type="text" name="addressDetail" class="form-control" placeholder="층수 (예: 3층)" required>
                 </div>
 
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <label class="form-label">학교 버스정류장 거리</label>
+                        <label class="form-label">한동대 방향 버스정류장 거리</label>
                         <select name="busDistance" class="form-select">
                             <option value="도보 5분 이내">도보 5분 이내</option>
                             <option value="도보 10분 이내">도보 10분 이내</option>
