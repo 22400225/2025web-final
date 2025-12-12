@@ -1,5 +1,6 @@
 package com.handong.web.room.controller;
 
+import com.handong.web.room.dao.AdminDao;
 import com.handong.web.room.service.RoomService;
 import com.handong.web.room.service.UserService;
 import com.handong.web.room.vo.RoomVO;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,8 +25,9 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private AdminDao adminDao; // [추가] 차트 데이터용
 
-    // 관리자 권한 체크 메서드
     private boolean isAdmin(HttpSession session) {
         UserVO loginUser = (UserVO) session.getAttribute("loginUser");
         return loginUser != null && "ADMIN".equals(loginUser.getRole());
@@ -31,27 +35,41 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
-        // 1. 관리자 아니면 쫓아내기
-        if (!isAdmin(session)) {
-            return "redirect:/";
-        }
+        if (!isAdmin(session)) return "redirect:/";
 
-        // 2. 데이터 가져오기
+        // 1. 기존 데이터 (목록 및 총계)
         List<UserVO> userList = userService.getAllUsers();
-        List<RoomVO> roomList = roomService.getRoomList(); // 기존 메서드 활용
-        int totalRooms = roomService.countRooms();
-        int totalUsers = userList.size();
-
-        // 3. 화면에 전달
+        List<RoomVO> roomList = roomService.getRoomList();
         model.addAttribute("userList", userList);
         model.addAttribute("roomList", roomList);
-        model.addAttribute("totalRooms", totalRooms);
-        model.addAttribute("totalUsers", totalUsers);
+        model.addAttribute("totalUsers", userList.size());
+        model.addAttribute("totalRooms", roomService.countRooms());
+
+        // 2. [추가] 차트 데이터 가공 (List<Map> -> JSON 형태의 문자열)
+        List<Map<String, Object>> userStats = adminDao.selectRecentUserStats();
+        List<Map<String, Object>> roomStats = adminDao.selectRecentRoomStats();
+
+        // 2-1. 회원 차트용 라벨/데이터 분리
+        String userLabels = userStats.stream().map(m -> "'" + m.get("period") + "'").collect(Collectors.joining(","));
+        String userCounts = userStats.stream().map(m -> String.valueOf(m.get("count"))).collect(Collectors.joining(","));
+
+        // 2-2. 매물 차트용 라벨/데이터 분리
+        String roomLabels = roomStats.stream().map(m -> "'" + m.get("period") + "'").collect(Collectors.joining(","));
+        String roomCounts = roomStats.stream().map(m -> String.valueOf(m.get("count"))).collect(Collectors.joining(","));
+
+        // 만약 데이터가 하나도 없으면 기본값 넣어주기 (차트 깨짐 방지)
+        if (userLabels.isEmpty()) { userLabels = "'데이터 없음'"; userCounts = "0"; }
+        if (roomLabels.isEmpty()) { roomLabels = "'데이터 없음'"; roomCounts = "0"; }
+
+        model.addAttribute("userLabels", userLabels); // 예: '10월','11월','12월'
+        model.addAttribute("userCounts", userCounts); // 예: 10, 5, 12
+        model.addAttribute("roomLabels", roomLabels);
+        model.addAttribute("roomCounts", roomCounts);
 
         return "admin/dashboard";
     }
 
-    // 회원 강제 추방
+    // (삭제 관련 메서드들은 그대로 유지...)
     @GetMapping("/user/delete")
     public String deleteUser(@RequestParam("id") int userNo, HttpSession session) {
         if (!isAdmin(session)) return "redirect:/";
@@ -59,7 +77,6 @@ public class AdminController {
         return "redirect:/admin/dashboard";
     }
 
-    // 게시물 강제 삭제
     @GetMapping("/room/delete")
     public String deleteRoom(@RequestParam("id") int roomNo, HttpSession session) {
         if (!isAdmin(session)) return "redirect:/";

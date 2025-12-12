@@ -21,7 +21,8 @@
     </select>
 
     <select id="selectAllUsers" resultType="com.handong.web.room.vo.UserVO">
-        SELECT * FROM tb_user ORDER BY created_at DESC
+        SELECT * FROM tb_user
+        WHERE role != 'ADMIN'  ORDER BY created_at DESC
     </select>
 
     <delete id="deleteUser">
