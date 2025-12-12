@@ -25,4 +25,6 @@ public interface RoomDao {
     void deleteRoom(int roomNo);
 
     void updateRoom(RoomVO vo);
+
+    int countAllRooms();
 }

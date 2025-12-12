@@ -3,28 +3,15 @@
 
 <mapper namespace="com.handong.web.room.dao.UserDao">
 
-    <resultMap id="UserResultMap" type="com.handong.web.room.vo.UserVO">
-        <id property="userNo" column="user_no"/>
-        <result property="studentId" column="student_id"/>
-        <result property="name" column="name"/>
-        <result property="phone" column="phone"/>
-        <result property="password" column="password"/>
-        <result property="gender" column="gender"/>
-        <result property="age" column="age"/>
-        <result property="language" column="language"/>
-        <result property="isAuth" column="is_auth"/>
-        <result property="createdAt" column="created_at"/>
-    </resultMap>
-
-    <insert id="insertUser" parameterType="com.handong.web.room.vo.UserVO">
+    <insert id="insertUser">
         INSERT INTO tb_user (
-            student_id, name, phone, password, gender, age, language, is_auth
+            student_id, name, phone, password, gender, age, language, is_auth, role, created_at
         ) VALUES (
-                     #{studentId}, #{name}, #{phone}, #{password}, #{gender}, #{age}, #{language}, 0
+                     #{studentId}, #{name}, #{phone}, #{password}, #{gender}, #{age}, #{language}, 0, 'USER', NOW()
                  )
     </insert>
 
-    <select id="loginUser" parameterType="com.handong.web.room.vo.UserVO" resultMap="UserResultMap">
+    <select id="loginUser" resultType="com.handong.web.room.vo.UserVO">
         SELECT * FROM tb_user
         WHERE student_id = #{studentId} AND password = #{password}
     </select>
@@ -40,9 +27,5 @@
     <delete id="deleteUser">
         DELETE FROM tb_user WHERE user_no = #{userNo}
     </delete>
-
-    <select id="loginUser" resultType="com.handong.web.room.vo.UserVO">
-        SELECT * FROM tb_user WHERE student_id = #{studentId} AND password = #{password}
-    </select>
 
 </mapper>

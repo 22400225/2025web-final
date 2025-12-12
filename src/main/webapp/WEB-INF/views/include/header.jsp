@@ -131,6 +131,13 @@
                 </c:if>
                 <c:if test="${not empty sessionScope.loginUser}">
                     <span class="text-muted me-2"><b>${sessionScope.loginUser.name}</b>님</span>
+
+                    <c:if test="${sessionScope.loginUser.role == 'ADMIN'}">
+                        <a href="/admin/dashboard" class="btn btn-dark rounded-pill btn-sm px-3 me-2 fw-bold">
+                            <i class="bi bi-gear-fill"></i> 관리
+                        </a>
+                    </c:if>
+
                     <a href="/user/logout" class="btn btn-secondary rounded-pill btn-sm px-3">로그아웃</a>
                 </c:if>
             </div>

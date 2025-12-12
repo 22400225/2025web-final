@@ -23,6 +23,11 @@ public class RoomService {
         return roomDao.selectRoomList(roomType, sort);
     }
 
+    public List<RoomVO> getRoomList() {
+        // 아무 조건이 없으면 -> "전체(all)"를 "최신순(latest)"으로 가져오라고 시킴
+        return getRoomList("all", "latest");
+    }
+
     // 3. 방 상세 정보 조회 (조회수 증가 포함)
     public RoomVO getRoomDetail(int roomNo) {
         // 상세 페이지를 볼 때마다 조회수를 1 올림
