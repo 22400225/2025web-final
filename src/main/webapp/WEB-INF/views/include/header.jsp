@@ -137,15 +137,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <c:if test="${sessionScope.loginUser.role != 'ADMIN'}">
-                    <li class="nav-item"><a class="nav-link" href="/room/list">방 구하기</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/room/write">방 내놓기</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/room/list">방 구하기</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/room/write">방 내놓기</a></li>
                 </c:if>
             </ul>
 
             <div class="d-flex align-items-center gap-2">
                 <c:if test="${empty sessionScope.loginUser}">
-                    <a href="/user/login" class="text-decoration-none text-muted fw-bold me-3" style="font-size: 15px;">로그인</a>
-                    <a href="/user/signup" class="btn btn-primary btn-sm px-4 rounded-pill">회원가입</a>
+                    <a href="${pageContext.request.contextPath}/user/login" class="text-decoration-none text-muted fw-bold me-3" style="font-size: 15px;">로그인</a>
+                    <a href="${pageContext.request.contextPath}/user/signup" class="btn btn-primary btn-sm px-4 rounded-pill">회원가입</a>
                 </c:if>
 
                 <c:if test="${not empty sessionScope.loginUser}">
@@ -154,12 +154,12 @@
                     </span>
 
                     <c:if test="${sessionScope.loginUser.role == 'ADMIN'}">
-                        <a href="/admin/dashboard" class="btn btn-dark rounded-pill btn-sm px-3 me-2 fw-bold">
+                        <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-dark rounded-pill btn-sm px-3 me-2 fw-bold">
                             <i class="bi bi-gear-fill"></i> 관리
                         </a>
                     </c:if>
 
-                    <a href="/user/logout" class="btn-logout">로그아웃</a>
+                    <a href="${pageContext.request.contextPath}/user/logout" class="btn-logout">로그아웃</a>
                 </c:if>
             </div>
         </div>

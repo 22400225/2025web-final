@@ -10,7 +10,7 @@
                 <span class="badge bg-secondary">No. ${room.roomNo}</span>
             </div>
 
-            <form action="/room/edit" method="post" enctype="multipart/form-data">
+            <form action="${pageContext.request.contextPath}/room/edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="roomNo" value="${room.roomNo}">
 
                 <div class="mb-4">
@@ -23,7 +23,7 @@
                     <div class="row g-2">
                         <div class="col-4">
                             <div class="border rounded-3 overflow-hidden position-relative bg-light" style="height: 150px;">
-                                <img id="preview1" src="${not empty room.filename1 ? '/resources/upload/'.concat(room.filename1) : ''}"
+                                <img id="preview1" src="${not empty room.filename1 ? pageContext.request.contextPath.concat('/resources/upload/').concat(room.filename1) : ''}"
                                      class="w-100 h-100" style="object-fit: cover; display: ${not empty room.filename1 ? 'block' : 'none'};">
 
                                 <div id="placeholder1" class="position-absolute top-50 start-50 translate-middle text-center text-muted"
@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-4">
                             <div class="border rounded-3 overflow-hidden position-relative bg-light" style="height: 150px;">
-                                <img id="preview2" src="${not empty room.filename2 ? '/resources/upload/'.concat(room.filename2) : ''}"
+                                <img id="preview2" src="${not empty room.filename2 ? pageContext.request.contextPath.concat('/resources/upload/').concat(room.filename2) : ''}"
                                      class="w-100 h-100" style="object-fit: cover; display: ${not empty room.filename2 ? 'block' : 'none'};">
 
                                 <div id="placeholder2" class="position-absolute top-50 start-50 translate-middle text-center text-muted"
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-4">
                             <div class="border rounded-3 overflow-hidden position-relative bg-light" style="height: 150px;">
-                                <img id="preview3" src="${not empty room.filename3 ? '/resources/upload/'.concat(room.filename3) : ''}"
+                                <img id="preview3" src="${not empty room.filename3 ? pageContext.request.contextPath.concat('/resources/upload/').concat(room.filename3) : ''}"
                                      class="w-100 h-100" style="object-fit: cover; display: ${not empty room.filename3 ? 'block' : 'none'};">
 
                                 <div id="placeholder3" class="position-absolute top-50 start-50 translate-middle text-center text-muted"
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="d-flex justify-content-end gap-2">
-                    <a href="/room/detail?id=${room.roomNo}" class="btn btn-secondary px-5 text-decoration-none">취소</a>
+                    <a href="${pageContext.request.contextPath}/room/detail?id=${room.roomNo}" class="btn btn-secondary px-5 text-decoration-none">취소</a>
                     <button type="submit" class="btn btn-primary px-5">수정 완료</button>
                 </div>
             </form>

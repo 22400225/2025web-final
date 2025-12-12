@@ -15,21 +15,21 @@
                                 <%-- 첫 번째 사진 --%>
                             <c:if test="${not empty room.filename1}">
                                 <div class="carousel-item active h-100">
-                                    <img src="/resources/upload/${room.filename1}" class="d-block w-100 h-100" style="object-fit: cover;">
+                                    <img src="${pageContext.request.contextPath}/resources/upload/${room.filename1}" class="d-block w-100 h-100" style="object-fit: cover;">
                                 </div>
                             </c:if>
 
-                                <%-- 두 번째 사진 (첫번째가 없으면 이게 active가 되어야 하는 예외처리는 복잡해서, 보통 1번은 필수라고 가정하거나 JS로 처리하지만 여기선 c:if로 단순화) --%>
+                                <%-- 두 번째 사진 --%>
                             <c:if test="${not empty room.filename2}">
                                 <div class="carousel-item h-100 ${empty room.filename1 ? 'active' : ''}">
-                                    <img src="/resources/upload/${room.filename2}" class="d-block w-100 h-100" style="object-fit: cover;">
+                                    <img src="${pageContext.request.contextPath}/resources/upload/${room.filename2}" class="d-block w-100 h-100" style="object-fit: cover;">
                                 </div>
                             </c:if>
 
                                 <%-- 세 번째 사진 --%>
                             <c:if test="${not empty room.filename3}">
                                 <div class="carousel-item h-100">
-                                    <img src="/resources/upload/${room.filename3}" class="d-block w-100 h-100" style="object-fit: cover;">
+                                    <img src="${pageContext.request.contextPath}/resources/upload/${room.filename3}" class="d-block w-100 h-100" style="object-fit: cover;">
                                 </div>
                             </c:if>
                         </div>
@@ -101,10 +101,10 @@
                 <c:if test="${sessionScope.loginUser.userNo == room.writerId}">
                     <div class="row g-2 mt-2">
                         <div class="col-6">
-                            <a href="/room/edit?id=${room.roomNo}" class="btn btn-light border w-100 fw-bold">수정</a>
+                            <a href="${pageContext.request.contextPath}/room/edit?id=${room.roomNo}" class="btn btn-light border w-100 fw-bold">수정</a>
                         </div>
                         <div class="col-6">
-                            <a href="/room/delete?id=${room.roomNo}" onclick="return confirm('정말 삭제하시겠습니까?')" class="btn btn-light border w-100 fw-bold text-danger">삭제</a>
+                            <a href="${pageContext.request.contextPath}/room/delete?id=${room.roomNo}" onclick="return confirm('정말 삭제하시겠습니까?')" class="btn btn-light border w-100 fw-bold text-danger">삭제</a>
                         </div>
                     </div>
                 </c:if>

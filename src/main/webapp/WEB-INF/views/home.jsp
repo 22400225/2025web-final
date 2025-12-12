@@ -54,8 +54,9 @@
         align-items: center;
         justify-content: center;
         transition: background 0.2s;
+        cursor: pointer;
     }
-    .search-btn:hover { background-color: var(--primary-hover); }
+    .search-btn:hover { background-color: #1b64da; }
 
     /* 카드 섹션 */
     .card-container { margin-top: -40px; position: relative; z-index: 10; padding-bottom: 60px; }
@@ -117,17 +118,17 @@
             한동인을 위한 안전한 매물을 확인해보세요.
         </p>
 
-        <div class="search-container mt-5">
-            <input type="text" class="search-input" placeholder="건물명, 지역(예: 평해길) 검색">
-            <button class="search-btn"><i class="bi bi-search"></i></button>
-        </div>
+        <form action="${pageContext.request.contextPath}/room/list" method="get" class="search-container mt-5">
+            <input type="text" name="keyword" class="search-input" placeholder="건물명, 지역(예: 평해길) 검색">
+            <button type="submit" class="search-btn"><i class="bi bi-search"></i></button>
+        </form>
     </div>
 </section>
 
 <div class="container card-container">
     <div class="row g-4">
         <div class="col-md-6">
-            <a href="/room/list" class="action-card">
+            <a href="${pageContext.request.contextPath}/room/list" class="action-card">
                 <div>
                     <div class="card-icon">
                         <i class="bi bi-house-door-fill"></i>
@@ -145,7 +146,7 @@
         </div>
 
         <div class="col-md-6">
-            <a href="/room/write" class="action-card" style="background-color: #E8F3FF;">
+            <a href="${pageContext.request.contextPath}/room/write" class="action-card" style="background-color: #E8F3FF;">
                 <div>
                     <div class="card-icon" style="background-color: #fff;">
                         <i class="bi bi-upload"></i>

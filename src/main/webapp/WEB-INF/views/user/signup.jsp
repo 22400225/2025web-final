@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
 
 <div class="row justify-content-center my-4">
@@ -6,20 +7,20 @@
         <div class="custom-card">
             <h2 class="fw-bold text-center mb-5">회원가입</h2>
 
-            <form action="/user/signup" method="post">
+            <form action="${pageContext.request.contextPath}/user/signup" method="post">
                 <h5 class="fw-bold mb-3 ms-1">기본 정보</h5>
                 <div class="mb-3">
                     <label class="form-label">이름</label>
-                    <input type="text" name="name" class="form-control" placeholder="실명을 입력해주세요">
+                    <input type="text" name="name" class="form-control" placeholder="실명을 입력해주세요" required>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">학번 (ID)</label>
-                        <input type="text" name="studentId" class="form-control" placeholder="예: 22200123">
+                        <input type="text" name="studentId" class="form-control" placeholder="예: 22200123" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">비밀번호</label>
-                        <input type="password" name="password" class="form-control" placeholder="비밀번호">
+                        <input type="password" name="password" class="form-control" placeholder="비밀번호" required>
                     </div>
                 </div>
 

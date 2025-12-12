@@ -6,7 +6,7 @@
         <div class="custom-card">
             <h3 class="fw-bold mb-4">내 방 내놓기</h3>
 
-            <form action="/room/write" method="post" enctype="multipart/form-data">
+            <form action="${pageContext.request.contextPath}/room/write" method="post" enctype="multipart/form-data">
                 <div class="mb-4">
                     <label class="form-label">제목</label>
                     <input type="text" name="title" class="form-control" placeholder="예: 벧엘관 3분거리 깨끗한 원룸 양도해요" required>
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="d-flex justify-content-end gap-2">
-                    <a href="/room/list" class="btn btn-secondary text-white text-decoration-none">취소</a>
+                    <a href="${pageContext.request.contextPath}/room/list" class="btn btn-secondary px-5 text-decoration-none">취소</a>
                     <button type="submit" class="btn btn-primary px-5">등록하기</button>
                 </div>
             </form>

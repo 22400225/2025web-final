@@ -33,10 +33,10 @@
         transition: all 0.2s;
     }
 
-    /* [수정] 활성화된 탭 글자색 흰색으로 강제 고정 */
+    /* 활성화된 탭 글자색 흰색으로 강제 고정 */
     .nav-pills .nav-link.active {
         background-color: var(--primary);
-        color: #ffffff !important; /* 무조건 흰색 */
+        color: #ffffff !important;
         border-color: var(--primary);
         box-shadow: 0 4px 10px rgba(49, 130, 246, 0.3);
         transform: translateY(-2px);
@@ -51,12 +51,18 @@
                 <a href="#" class="list-group-item list-group-item-action border-0 rounded-3 active fw-bold mb-2" style="background-color: var(--primary); color: white;">
                     <i class="bi bi-grid-fill me-2"></i> 대시보드
                 </a>
-                <a href="/" class="list-group-item list-group-item-action border-0 rounded-3 text-muted">
+                <a href="${pageContext.request.contextPath}/" class="list-group-item list-group-item-action border-0 rounded-3 text-muted">
                     <i class="bi bi-house-door me-2"></i> 메인으로 돌아가기
                 </a>
             </div>
 
-
+            <div class="mt-5 p-3 bg-light rounded-4">
+                <p class="mb-1 text-muted small fw-bold">관리자 계정</p>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:32px; height:32px;">A</div>
+                    <span class="fw-bold">${sessionScope.loginUser.name}</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -86,13 +92,13 @@
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="chart-container">
-                    <h6 class="fw-bold mb-3 ms-2">회원 증가 추이 (최근 3개월)</h6>
+                    <h6 class="fw-bold mb-3 ms-2">📊 회원 증가 추이 (최근 3개월)</h6>
                     <canvas id="userChart"></canvas>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="chart-container">
-                    <h6 class="fw-bold mb-3 ms-2">매물 등록 추이 (최근 3개월)</h6>
+                    <h6 class="fw-bold mb-3 ms-2">📈 매물 등록 추이 (최근 3개월)</h6>
                     <canvas id="roomChart"></canvas>
                 </div>
             </div>
@@ -112,6 +118,7 @@
         </ul>
 
         <div class="tab-content custom-card p-0 overflow-hidden" id="pills-tabContent">
+
             <div class="tab-pane fade show active" id="pills-users">
                 <div class="table-responsive">
                     <table class="table table-custom mb-0 w-100">
@@ -134,7 +141,7 @@
                                 <td>${user.phone}</td>
                                 <td><fmt:formatDate value="${user.createdAt}" pattern="yyyy.MM.dd"/></td>
                                 <td>
-                                    <a href="/admin/user/delete?id=${user.userNo}" onclick="return confirm('이 회원을 탈퇴시키시겠습니까?')" class="btn btn-sm btn-danger rounded-pill fw-bold px-3">탈퇴</a>
+                                    <a href="${pageContext.request.contextPath}/admin/user/delete?id=${user.userNo}" onclick="return confirm('이 회원을 탈퇴시키시겠습니까?')" class="btn btn-sm btn-danger rounded-pill fw-bold px-3">탈퇴</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -160,12 +167,12 @@
                         <c:forEach var="room" items="${roomList}" varStatus="status">
                             <tr>
                                 <td class="fw-bold text-primary">${status.count}</td>
-                                <td><a href="/room/detail?id=${room.roomNo}" class="text-dark fw-bold text-decoration-none">${room.title}</a></td>
+                                <td><a href="${pageContext.request.contextPath}/room/detail?id=${room.roomNo}" class="text-dark fw-bold text-decoration-none">${room.title}</a></td>
                                 <td>${room.writerName}</td>
                                 <td><fmt:formatNumber value="${room.price}" pattern="#,###"/>원</td>
                                 <td><fmt:formatDate value="${room.createdAt}" pattern="yyyy.MM.dd"/></td>
                                 <td>
-                                    <a href="/admin/room/delete?id=${room.roomNo}" onclick="return confirm('이 매물을 강제 삭제하시겠습니까?')" class="btn btn-sm btn-danger rounded-pill fw-bold px-3">삭제</a>
+                                    <a href="${pageContext.request.contextPath}/admin/room/delete?id=${room.roomNo}" onclick="return confirm('이 매물을 강제 삭제하시겠습니까?')" class="btn btn-sm btn-danger rounded-pill fw-bold px-3">삭제</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -178,7 +185,7 @@
 </div>
 
 <script>
-    // 차트 데이터
+    // 차트 데이터 (Controller에서 전달받음)
     new Chart(document.getElementById('userChart'), {
         type: 'line',
         data: {
