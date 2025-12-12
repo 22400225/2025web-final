@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="d-flex justify-content-end gap-2">
-                    <a href="/room/detail?id=${room.roomNo}" class="btn btn-secondary text-white text-decoration-none">취소</a>
+                    <a href="/room/detail?id=${room.roomNo}" class="btn btn-secondary px-5 text-decoration-none">취소</a>
                     <button type="submit" class="btn btn-primary px-5">수정 완료</button>
                 </div>
             </form>

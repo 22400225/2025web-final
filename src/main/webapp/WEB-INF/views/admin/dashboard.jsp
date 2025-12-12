@@ -56,13 +56,7 @@
                 </a>
             </div>
 
-            <div class="mt-5 p-3 bg-light rounded-4">
-                <p class="mb-1 text-muted small fw-bold">관리자 계정</p>
-                <div class="d-flex align-items-center gap-2">
-                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:32px; height:32px;">A</div>
-                    <span class="fw-bold">${sessionScope.loginUser.name}</span>
-                </div>
-            </div>
+
         </div>
     </div>
 
@@ -92,13 +86,13 @@
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="chart-container">
-                    <h6 class="fw-bold mb-3 ms-2">📊 회원 증가 추이 (최근 3개월)</h6>
+                    <h6 class="fw-bold mb-3 ms-2">회원 증가 추이 (최근 3개월)</h6>
                     <canvas id="userChart"></canvas>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="chart-container">
-                    <h6 class="fw-bold mb-3 ms-2">📈 매물 등록 추이 (최근 3개월)</h6>
+                    <h6 class="fw-bold mb-3 ms-2">매물 등록 추이 (최근 3개월)</h6>
                     <canvas id="roomChart"></canvas>
                 </div>
             </div>
@@ -140,7 +134,7 @@
                                 <td>${user.phone}</td>
                                 <td><fmt:formatDate value="${user.createdAt}" pattern="yyyy.MM.dd"/></td>
                                 <td>
-                                    <a href="/admin/user/delete?id=${user.userNo}" onclick="return confirm('이 회원을 추방하시겠습니까?')" class="btn btn-sm btn-danger rounded-pill fw-bold px-3">추방</a>
+                                    <a href="/admin/user/delete?id=${user.userNo}" onclick="return confirm('이 회원을 탈퇴시키시겠습니까?')" class="btn btn-sm btn-danger rounded-pill fw-bold px-3">탈퇴</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -163,9 +157,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="room" items="${roomList}">
+                        <c:forEach var="room" items="${roomList}" varStatus="status">
                             <tr>
-                                <td>#${room.roomNo}</td>
+                                <td class="fw-bold text-primary">${status.count}</td>
                                 <td><a href="/room/detail?id=${room.roomNo}" class="text-dark fw-bold text-decoration-none">${room.title}</a></td>
                                 <td>${room.writerName}</td>
                                 <td><fmt:formatNumber value="${room.price}" pattern="#,###"/>원</td>
