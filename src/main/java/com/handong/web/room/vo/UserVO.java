@@ -16,4 +16,5 @@ public class UserVO {
     private boolean isAuth;      // is_auth (DB는 0/1이지만 자바는 boolean 사용 가능)
     private Date createdAt;      // created_at
     private String filename;     // user_profile_image
+    private String role;         // admin, user
 }

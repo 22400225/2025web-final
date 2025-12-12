@@ -38,4 +38,9 @@ public class RoomService {
     public void updateRoom(RoomVO vo) {
         roomDao.updateRoom(vo);
     }
+
+    // 관리자용: 총 매물 수
+    public int countRooms() {
+        return roomDao.countAllRooms();
+    }
 }

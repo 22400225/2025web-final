@@ -33,4 +33,16 @@
         SELECT COUNT(*) FROM tb_user WHERE student_id = #{studentId}
     </select>
 
+    <select id="selectAllUsers" resultType="com.handong.web.room.vo.UserVO">
+        SELECT * FROM tb_user ORDER BY created_at DESC
+    </select>
+
+    <delete id="deleteUser">
+        DELETE FROM tb_user WHERE user_no = #{userNo}
+    </delete>
+
+    <select id="loginUser" resultType="com.handong.web.room.vo.UserVO">
+        SELECT * FROM tb_user WHERE student_id = #{studentId} AND password = #{password}
+    </select>
+
 </mapper>

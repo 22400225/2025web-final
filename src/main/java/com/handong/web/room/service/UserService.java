@@ -5,6 +5,8 @@ import com.handong.web.room.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -19,5 +21,14 @@ public class UserService {
     // 로그인 처리 (성공하면 세션에 정보 저장, 실패하면 null 리턴)
     public UserVO login(UserVO vo) {
         return userDao.loginUser(vo);
+    }
+
+    // 관리자용: 전체 유저 목록
+    public List<UserVO> getAllUsers() {
+        return userDao.selectAllUsers();
+    }
+    // 관리자용: 유저 삭제
+    public void deleteUser(int userNo) {
+        userDao.deleteUser(userNo);
     }
 }

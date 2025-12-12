@@ -62,6 +62,10 @@
         WHERE r.room_no = #{roomNo}
     </select>
 
+    <select id="countAllRooms" resultType="int">
+        SELECT COUNT(*) FROM tb_room
+    </select>
+
     <update id="increaseViewCount">
         UPDATE tb_room SET view_count = view_count + 1 WHERE room_no = #{roomNo}
     </update>
